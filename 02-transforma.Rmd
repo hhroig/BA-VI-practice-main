@@ -110,7 +110,7 @@ arrange(flights, desc(is.na(dep_time)), dep_time)
 
 9. Ordena los vuelos para encontrar los que más se retrasaron. Encuentra los que despegaron antes.
 
-10. Ordena los vuelos de forma tal que permita encuentra los de mayor velocidad.
+10. Ordena los vuelos de forma tal que permita encontrar los de mayor velocidad.
 
 11. ¿Cuáles son los vuelos que mayor (menor) distancia recorrieron?
 
@@ -145,7 +145,7 @@ También dispondremos de las "funciones de ayuda a la selección":
 * `contains("ijk")`: columnas que contienen la expresión “ijk”.
 * `matches(""[pt]xyz"")`: selecciona variables que coinciden con una expresión regular.
 * `num_range("x", 1:3)`: equivalente a seleccionr: `paste0("x", 1:3)`.
-* `everuthing()`: selecciona todas las variables. Útil si deseamos poner algunas columnas de interés al incio, porque `select()` no incluye columnas repetidas:
+* `everything()`: selecciona todas las variables. Útil si deseamos poner algunas columnas de interés al incio, porque `select()` no incluye columnas repetidas:
 
 ```{r}
 flights %>%
@@ -163,7 +163,7 @@ flights %>%
 vars <- c("year", "month", "day", "dep_delay", "arr_delay")
 ```
 
-14. ¿QUé pasa con el siguiente código? ¿Debería seleccionar todas esas variables?
+14. ¿QUé pasa con el siguiente código? ¿Debería seleccionar todas esas variables? Hint: mirar el argumento `ignore.case`.
 
 ```{r}
 select(flights, contains("TiMe"))
@@ -197,18 +197,18 @@ flights %>%
 
 #### Ejercicios
 
-15. Convertir `dep_time` y `sched_dep_time` a minutos transcurridos desde la medianoche. Notar que son variables importantes pero con un formato difícil de trabajar (es complicado hacer operaciones artiméticas con ellos). Sigue las siguientes directrices:
+**15.** Convertir `dep_time` y `sched_dep_time` a minutos transcurridos desde la medianoche. Notar que son variables importantes pero con un formato difícil de trabajar (es complicado hacer operaciones artiméticas con ellos). Sigue las siguientes directrices:
 
   * Una observación de `dep_time` sería por ejemplo `2021` que indica las 20:21hrs (8:21pm).
   * Para obtener las horas transcurridas dede la medianoche hasta las 20:21hrs tendremos que usar la división entera `2021 %/% 100 == 20`. Luego es fácil obtenir los minutos multiplicando por 60.
   * Los 21 minutos restantes podemos obtenerlos con el resto de la división `2021 %% 100 == 21`... no olvides sumar ambas cantidades
   * Finalmente, tendrás que lidiar con la medianoche, representada con `2400`. Primero, comprueba a cuántos minutos corresponde según nuestras operaciones. Luego, considera calcular el resto de la división por esta cantidad de minutos (siempre que `x <= y` y ambos sean positivos, tendremos `x %% y == 0`).
 
-16. Compara `air_time` con `arr_time - dep_time`. ¿Es necesaria hacer la transformación del ejercicio anterior? ¿Puedes encontrar en cuántos casos `air_time != arr_time - dep_time`? ¿Por qué pasa esto, no deberíamos obtener que el tiempo de vuelo es la diferencia entre la llegada y la salida? 
+**16.** Compara `air_time` con `arr_time - dep_time`. ¿Es necesaria hacer la transformación del ejercicio anterior? ¿Puedes encontrar en cuántos casos `air_time != arr_time - dep_time`? ¿Por qué pasa esto, no deberíamos obtener que el tiempo de vuelo es la diferencia entre la llegada y la salida? 
 
-17. ¿Qué relación crees que habrá entre `dep_time`, `sched_dep_time` y `dep_delay`? Encuentra el número de observaciones en las que no se cumple tu hipótesis.
+**17.** ¿Qué relación crees que habrá entre `dep_time`, `sched_dep_time` y `dep_delay`? Encuentra el número de observaciones en las que no se cumple tu hipótesis.
 
-18. Encuentra los 10 vuelos que más se retrasaron.
+**18.** Encuentra los 10 vuelos que más se retrasaron.
 
 ### Resumir variables
 
@@ -264,7 +264,7 @@ daily %>%
 
 #### Ejercicios
 
-19. Mira el número de vuelos cancelados por día e intenta encontrar algún patrón. ¿Está relacionada la proporción de vuelos cancelados con el retraso medio? Hint:
+**19.** Mira el número de vuelos cancelados por día e intenta encontrar algún patrón. ¿Está relacionada la proporción de vuelos cancelados con el retraso medio? Hint:
 
   * Crear una nueva variable/columna que indique si un vuelo se ha cancelado o no (definiremos `cancelado = (is.na(arr_delay) | is.na(dep_delay))`),
   * No olvides agrupar (año, mes, día ) y luego cuenta el número total de vuelos y el número de cancelados,
@@ -307,7 +307,7 @@ ggplot(cancelled_and_delays) +
 
 
 20. ¿A qué hora del día (`hour`) deberías viajar si quieres evitar retrasos tanto como sea posible? Hints:
-  * Agrupar por la variable que consideres oportuna, 
+  * Agrupar por la variable que consideres oportuna (vamos que es `hour`), 
   * Resume el tiempo que ha demorado el vuelo (¿es más importante `arr_delay` o `dep_delay`?),
   * Reordena adecuadamente.
 

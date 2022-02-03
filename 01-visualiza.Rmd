@@ -365,14 +365,7 @@ p + geom_point() +
 
 #### Ejercicios
 
-17. Un tercer parámetro de posición para los diagramas de barras es `position = "identity"`. Modifica el ajuste de posición del siguiente código y compara la idoneidad del mismo con el obtenido para `position = "dodge"`. Hint: considera añadir algo de transparencia (e.g. `alpha = 0.5`) o quitar el relleno por completo (i.e. `fill = NA`).
-
-```{r, eval = F}
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = clarity))
-```
-
-18. Los diagramas de cajas se logran con `geom_boxplot`. Este tipo de gráficos permiten comparar las distribuciones de una variable continua para diferentes grupos o clases. Por ejemplo, para los datos `mpg` podemos comparar la distribución del consumo de acuerdo al tipo de tracción:
+17. Los diagramas de cajas se logran con `geom_boxplot`. Este tipo de gráficos permiten comparar las distribuciones de una variable continua para diferentes grupos o clases. Por ejemplo, para los datos `mpg` podemos comparar la distribución del consumo de acuerdo al tipo de tracción:
 
 ```{r}
 p_box <- ggplot(data = mpg, aes(x = drv, y = hwy)) +
@@ -389,7 +382,7 @@ ggplot(data = mpg, aes(x = drv, y = hwy)) +
   theme_light()
 ```
 
-19. Modifica `p_box` para que represente también la información relativa al tipo de vehículo (variable `class`). ¿Puedes identificar el *ajuste de posición* por defecto de `geom_boxplot`?
+18. Modifica `p_box` para que represente también la información relativa al tipo de vehículo (variable `class`). ¿Puedes identificar el *ajuste de posición* por defecto de `geom_boxplot`?
 
 ```{r, eval=FALSE, echo=FALSE}
 p_box2 <- ggplot(data = mpg, aes(x = drv, y = hwy, color = class)) +
@@ -397,9 +390,9 @@ p_box2 <- ggplot(data = mpg, aes(x = drv, y = hwy, color = class)) +
 p_box2
 ```
 
-20. Cambia la orientación de los diagramas de cajas de verticales a horizontales. Hint: consulta la documentación de `coord_flip`.
+19. Cambia la orientación de los diagramas de cajas de verticales a horizontales. Hint: consulta la documentación de `coord_flip`.
 
-21. Consulta la documentación de `coord_polar` y construye un diagrama circular ("de pastel") de la variable tipo de tracción (`drv`).
+20. Consulta la documentación de `coord_polar` y construye un diagrama circular ("de pastel") de la variable tipo de tracción (`drv`).
 
 ## Resumen
 
@@ -433,5 +426,5 @@ ggplot(data = <DATA>) +
 
 #### Ejercicios
 
-22. Cambia la escala y tema de algunos de los gráficos que has desarrollado. Hint: en el *Cheatsheet: Data Visualization with ggplot2* tienes un resumen muy completo de las herramientas que necesitas.
+21. Cambia la escala y tema de algunos de los gráficos que has desarrollado. Hint: en el *Cheatsheet: Data Visualization with ggplot2* tienes un resumen muy completo de las herramientas que necesitas.
 

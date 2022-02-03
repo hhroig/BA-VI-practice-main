@@ -373,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="7" style="list-style-type: decimal">
 <li><p>Si por defecto <code>arrange()</code> coloca los <code>NA</code> al final, ¿hay alguna forma de colocarlos al inicio? Hint: usa <code>is.na()</code>.</p></li>
 <li><p>Ordena los vuelos para encontrar los que más se retrasaron. Encuentra los que despegaron antes.</p></li>
-<li><p>Ordena los vuelos de forma tal que permita encuentra los de mayor velocidad.</p></li>
+<li><p>Ordena los vuelos de forma tal que permita encontrar los de mayor velocidad.</p></li>
 <li><p>¿Cuáles son los vuelos que mayor (menor) distancia recorrieron?</p></li>
 </ol>
 </div>
@@ -429,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>contains("ijk")</code>: columnas que contienen la expresión “ijk”.</li>
 <li><code>matches(""[pt]xyz"")</code>: selecciona variables que coinciden con una expresión regular.</li>
 <li><code>num_range("x", 1:3)</code>: equivalente a seleccionr: <code>paste0("x", 1:3)</code>.</li>
-<li><code>everuthing()</code>: selecciona todas las variables. Útil si deseamos poner algunas columnas de interés al incio, porque <code>select()</code> no incluye columnas repetidas:</li>
+<li><code>everything()</code>: selecciona todas las variables. Útil si deseamos poner algunas columnas de interés al incio, porque <code>select()</code> no incluye columnas repetidas:</li>
 </ul>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="transforma.html#cb74-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
 <span id="cb74-2"><a href="transforma.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(time_hour, air_time, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
@@ -454,7 +454,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="transforma.html#cb76-1" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;dep_delay&quot;</span>, <span class="st">&quot;arr_delay&quot;</span>)</span></code></pre></div>
 <ol start="14" style="list-style-type: decimal">
-<li>¿QUé pasa con el siguiente código? ¿Debería seleccionar todas esas variables?</li>
+<li>¿QUé pasa con el siguiente código? ¿Debería seleccionar todas esas variables? Hint: mirar el argumento <code>ignore.case</code>.</li>
 </ol>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="transforma.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">contains</span>(<span class="st">&quot;TiMe&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 6
@@ -512,20 +512,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5    19  394.  1.93          9.83</code></pre>
 <div id="ejercicios-11" class="section level4" number="3.2.4.1">
 <h4><span class="header-section-number">3.2.4.1</span> Ejercicios</h4>
-<ol start="15" style="list-style-type: decimal">
-<li>Convertir <code>dep_time</code> y <code>sched_dep_time</code> a minutos transcurridos desde la medianoche. Notar que son variables importantes pero con un formato difícil de trabajar (es complicado hacer operaciones artiméticas con ellos). Sigue las siguientes directrices:</li>
-</ol>
+<p><strong>15.</strong> Convertir <code>dep_time</code> y <code>sched_dep_time</code> a minutos transcurridos desde la medianoche. Notar que son variables importantes pero con un formato difícil de trabajar (es complicado hacer operaciones artiméticas con ellos). Sigue las siguientes directrices:</p>
 <ul>
 <li>Una observación de <code>dep_time</code> sería por ejemplo <code>2021</code> que indica las 20:21hrs (8:21pm).</li>
 <li>Para obtener las horas transcurridas dede la medianoche hasta las 20:21hrs tendremos que usar la división entera <code>2021 %/% 100 == 20</code>. Luego es fácil obtenir los minutos multiplicando por 60.</li>
 <li>Los 21 minutos restantes podemos obtenerlos con el resto de la división <code>2021 %% 100 == 21</code>… no olvides sumar ambas cantidades</li>
 <li>Finalmente, tendrás que lidiar con la medianoche, representada con <code>2400</code>. Primero, comprueba a cuántos minutos corresponde según nuestras operaciones. Luego, considera calcular el resto de la división por esta cantidad de minutos (siempre que <code>x &lt;= y</code> y ambos sean positivos, tendremos <code>x %% y == 0</code>).</li>
 </ul>
-<ol start="16" style="list-style-type: decimal">
-<li><p>Compara <code>air_time</code> con <code>arr_time - dep_time</code>. ¿Es necesaria hacer la transformación del ejercicio anterior? ¿Puedes encontrar en cuántos casos <code>air_time != arr_time - dep_time</code>? ¿Por qué pasa esto, no deberíamos obtener que el tiempo de vuelo es la diferencia entre la llegada y la salida?</p></li>
-<li><p>¿Qué relación crees que habrá entre <code>dep_time</code>, <code>sched_dep_time</code> y <code>dep_delay</code>? Encuentra el número de observaciones en las que no se cumple tu hipótesis.</p></li>
-<li><p>Encuentra los 10 vuelos que más se retrasaron.</p></li>
-</ol>
+<p><strong>16.</strong> Compara <code>air_time</code> con <code>arr_time - dep_time</code>. ¿Es necesaria hacer la transformación del ejercicio anterior? ¿Puedes encontrar en cuántos casos <code>air_time != arr_time - dep_time</code>? ¿Por qué pasa esto, no deberíamos obtener que el tiempo de vuelo es la diferencia entre la llegada y la salida?</p>
+<p><strong>17.</strong> ¿Qué relación crees que habrá entre <code>dep_time</code>, <code>sched_dep_time</code> y <code>dep_delay</code>? Encuentra el número de observaciones en las que no se cumple tu hipótesis.</p>
+<p><strong>18.</strong> Encuentra los 10 vuelos que más se retrasaron.</p>
 </div>
 </div>
 <div id="resumir-variables" class="section level3" number="3.2.5">
@@ -631,9 +627,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1  336776</code></pre>
 <div id="ejercicios-12" class="section level4" number="3.2.5.1">
 <h4><span class="header-section-number">3.2.5.1</span> Ejercicios</h4>
-<ol start="19" style="list-style-type: decimal">
-<li>Mira el número de vuelos cancelados por día e intenta encontrar algún patrón. ¿Está relacionada la proporción de vuelos cancelados con el retraso medio? Hint:</li>
-</ol>
+<p><strong>19.</strong> Mira el número de vuelos cancelados por día e intenta encontrar algún patrón. ¿Está relacionada la proporción de vuelos cancelados con el retraso medio? Hint:</p>
 <ul>
 <li>Crear una nueva variable/columna que indique si un vuelo se ha cancelado o no (definiremos <code>cancelado = (is.na(arr_delay) | is.na(dep_delay))</code>),</li>
 <li>No olvides agrupar (año, mes, día ) y luego cuenta el número total de vuelos y el número de cancelados,</li>
@@ -645,7 +639,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>¿A qué hora del día (<code>hour</code>) deberías viajar si quieres evitar retrasos tanto como sea posible? Hints:</li>
 </ol>
 <ul>
-<li>Agrupar por la variable que consideres oportuna,</li>
+<li>Agrupar por la variable que consideres oportuna (vamos que es <code>hour</code>),</li>
 <li>Resume el tiempo que ha demorado el vuelo (¿es más importante <code>arr_delay</code> o <code>dep_delay</code>?),</li>
 <li>Reordena adecuadamente.</li>
 </ul>

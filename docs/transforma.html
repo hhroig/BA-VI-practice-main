@@ -221,10 +221,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="datos-1" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Datos</h2>
 <p>Vamos a trabajar con el <strong>data frame</strong> <a href="https://rdrr.io/cran/nycflights13/man/flights.html"><code>nycflights13::flights</code></a>. Una vez más ten en cuanta los “conflictos” y asegúrate de usar la función correcta (<code>paquete_correcto::fun_repetida(...)</code>).</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="transforma.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
-<span id="cb48-2"><a href="transforma.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb48-3"><a href="transforma.html#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="transforma.html#cb48-4" aria-hidden="true" tabindex="-1"></a>flights</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="transforma.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb47-2"><a href="transforma.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb47-3"><a href="transforma.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="transforma.html#cb47-4" aria-hidden="true" tabindex="-1"></a>flights</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -263,7 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="filtrar-filas" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Filtrar filas</h3>
 <p>Con <code>filter()</code> podemos filtrar/extraer las observaciones de acuerdo a características de una o varias variables, usando los operadores de comparación lógicos. Por ejemplo, para filtrar todos los vuelos ocurridos en los 1eros de Enero:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="transforma.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="transforma.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 842 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##    &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -281,17 +281,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   carrier &lt;chr&gt;, flight &lt;int&gt;, tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;,
 ## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Todos los vuelos de Enero a Febrero:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="transforma.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nivel: &quot;beginner&quot;</span></span>
-<span id="cb52-2"><a href="transforma.html#cb52-2" aria-hidden="true" tabindex="-1"></a>flights_1_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">2</span>)</span>
-<span id="cb52-3"><a href="transforma.html#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-4"><a href="transforma.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co"># nivel: &quot;beginner&quot; adelantado</span></span>
-<span id="cb52-5"><a href="transforma.html#cb52-5" aria-hidden="true" tabindex="-1"></a>flights_1_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb52-6"><a href="transforma.html#cb52-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-7"><a href="transforma.html#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># nivel: &quot;tidyverser&quot; :)</span></span>
-<span id="cb52-8"><a href="transforma.html#cb52-8" aria-hidden="true" tabindex="-1"></a>flights_1_2 <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
-<span id="cb52-9"><a href="transforma.html#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="transforma.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nivel: &quot;beginner&quot;</span></span>
+<span id="cb51-2"><a href="transforma.html#cb51-2" aria-hidden="true" tabindex="-1"></a>flights_1_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb51-3"><a href="transforma.html#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="transforma.html#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># nivel: &quot;beginner&quot; adelantado</span></span>
+<span id="cb51-5"><a href="transforma.html#cb51-5" aria-hidden="true" tabindex="-1"></a>flights_1_2 <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb51-6"><a href="transforma.html#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="transforma.html#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co"># nivel: &quot;tidyverser&quot; :)</span></span>
+<span id="cb51-8"><a href="transforma.html#cb51-8" aria-hidden="true" tabindex="-1"></a>flights_1_2 <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb51-9"><a href="transforma.html#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span></code></pre></div>
 <p>Vuelos que no se han retrasado más de 2hrs (tanto salida como llegada):</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="transforma.html#cb53-1" aria-hidden="true" tabindex="-1"></a>not_delayed <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, arr_delay <span class="sc">&lt;=</span> <span class="dv">120</span>, dep_delay <span class="sc">&lt;=</span> <span class="dv">120</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="transforma.html#cb52-1" aria-hidden="true" tabindex="-1"></a>not_delayed <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, arr_delay <span class="sc">&lt;=</span> <span class="dv">120</span>, dep_delay <span class="sc">&lt;=</span> <span class="dv">120</span>)</span></code></pre></div>
 <p>Algo interesante de <code>filter()</code> es que deja fuera directamente los <code>NA</code>s.</p>
 <div id="ejercicios-8" class="section level4" number="3.2.1.1">
 <h4><span class="header-section-number">3.2.1.1</span> Ejercicios:</h4>
@@ -310,21 +310,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>¿Cuántos vuelos no tienen información sobre <code>dep_time</code>? ¿Alguna otra variable tiene datos perdidos? ¿Qué crees que representan en cada caso?</p></li>
 <li><p>¿Qué crees de los siguientes resultados?</p></li>
 </ol>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="transforma.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span><span class="sc">^</span><span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="transforma.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span><span class="sc">^</span><span class="dv">0</span></span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="transforma.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">|</span> <span class="cn">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="transforma.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">|</span> <span class="cn">TRUE</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="transforma.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="cn">FALSE</span> <span class="sc">&amp;</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="transforma.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="cn">FALSE</span> <span class="sc">&amp;</span> <span class="cn">NA</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="transforma.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">*</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="transforma.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="cn">NA</span> <span class="sc">*</span> <span class="dv">0</span></span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 </div>
 </div>
 <div id="rerodenar-filas" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Rerodenar filas</h3>
 <p>Con <code>arrange()</code> podemos ordenar las observaciones (filas) de nuestros data frame, de acuerdo a una o más variables (columnas). En general, la ordenación se hará de acuerdo a la primera variable y el resto se usará en caso de “empate”. Por defecto, la ordenación es ascendente y los <code>NA</code> se colocan al final:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="transforma.html#cb62-1" aria-hidden="true" tabindex="-1"></a>fl_asc <span class="ot">&lt;-</span>  <span class="fu">arrange</span>(flights, year, month, day, dep_time)</span>
-<span id="cb62-2"><a href="transforma.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fl_asc, <span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="transforma.html#cb61-1" aria-hidden="true" tabindex="-1"></a>fl_asc <span class="ot">&lt;-</span>  <span class="fu">arrange</span>(flights, year, month, day, dep_time)</span>
+<span id="cb61-2"><a href="transforma.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fl_asc, <span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 7 x 19
 ##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -338,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # ... with 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
 ## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 ## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="transforma.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(fl_asc, <span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="transforma.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(fl_asc, <span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 7 x 19
 ##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -353,8 +353,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 ## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Orden descendente, de acuerdo a <code>dep_time</code>:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="transforma.html#cb66-1" aria-hidden="true" tabindex="-1"></a>fl_dsc <span class="ot">&lt;-</span>  <span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_time))</span>
-<span id="cb66-2"><a href="transforma.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fl_dsc, <span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="transforma.html#cb65-1" aria-hidden="true" tabindex="-1"></a>fl_dsc <span class="ot">&lt;-</span>  <span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_time))</span>
+<span id="cb65-2"><a href="transforma.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(fl_dsc, <span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 7 x 19
 ##    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
@@ -381,10 +381,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="seleccionar-variables" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Seleccionar variables</h3>
 <p>Con <code>select()</code> podemos justamente seleccionar variables (columnas) de interés.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="transforma.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionamos año, mes y día</span></span>
-<span id="cb68-2"><a href="transforma.html#cb68-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
-<span id="cb68-3"><a href="transforma.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day) <span class="sc">%&gt;%</span> </span>
-<span id="cb68-4"><a href="transforma.html#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="transforma.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionamos año, mes y día</span></span>
+<span id="cb67-2"><a href="transforma.html#cb67-2" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb67-3"><a href="transforma.html#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year, month, day) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-4"><a href="transforma.html#cb67-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##    year month   day
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -393,11 +393,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3  2013     1     1
 ## 4  2013     1     1
 ## 5  2013     1     1</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="transforma.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionamos todas las columnas desde año (year) hasta día (day),</span></span>
-<span id="cb70-2"><a href="transforma.html#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ambas inclusive</span></span>
-<span id="cb70-3"><a href="transforma.html#cb70-3" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
-<span id="cb70-4"><a href="transforma.html#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year<span class="sc">:</span>day) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-5"><a href="transforma.html#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="transforma.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionamos todas las columnas desde año (year) hasta día (day),</span></span>
+<span id="cb69-2"><a href="transforma.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ambas inclusive</span></span>
+<span id="cb69-3"><a href="transforma.html#cb69-3" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb69-4"><a href="transforma.html#cb69-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(year<span class="sc">:</span>day) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-5"><a href="transforma.html#cb69-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##    year month   day
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -406,11 +406,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3  2013     1     1
 ## 4  2013     1     1
 ## 5  2013     1     1</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="transforma.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionamos todas las columnas excepto las que van desde año (year) </span></span>
-<span id="cb72-2"><a href="transforma.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="co"># hasta día (day), ambas inclusive</span></span>
-<span id="cb72-3"><a href="transforma.html#cb72-3" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
-<span id="cb72-4"><a href="transforma.html#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(year<span class="sc">:</span>day)) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-5"><a href="transforma.html#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="transforma.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleccionamos todas las columnas excepto las que van desde año (year) </span></span>
+<span id="cb71-2"><a href="transforma.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="co"># hasta día (day), ambas inclusive</span></span>
+<span id="cb71-3"><a href="transforma.html#cb71-3" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb71-4"><a href="transforma.html#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>(year<span class="sc">:</span>day)) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-5"><a href="transforma.html#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 16
 ##   dep_time sched_dep_time dep_delay arr_time sched_arr_time arr_delay carrier
 ##      &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;  
@@ -431,9 +431,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>num_range("x", 1:3)</code>: equivalente a seleccionr: <code>paste0("x", 1:3)</code>.</li>
 <li><code>everything()</code>: selecciona todas las variables. Útil si deseamos poner algunas columnas de interés al incio, porque <code>select()</code> no incluye columnas repetidas:</li>
 </ul>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="transforma.html#cb74-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
-<span id="cb74-2"><a href="transforma.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(time_hour, air_time, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb74-3"><a href="transforma.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="transforma.html#cb73-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="transforma.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(time_hour, air_time, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb73-3"><a href="transforma.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 19
 ##   time_hour           air_time  year month   day dep_time sched_dep_time
 ##   &lt;dttm&gt;                 &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;
@@ -452,11 +452,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>¿Cuál será la forma más corta de seleccionar: <code>dep_time</code>, <code>dep_delay</code>, <code>arr_time</code>, <code>arr_delay</code>?</p></li>
 <li><p>Queremos seleccionar las variables indicadas en el vector <code>vars</code>. Hint: usar <code>any_of</code>.</p></li>
 </ol>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="transforma.html#cb76-1" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;dep_delay&quot;</span>, <span class="st">&quot;arr_delay&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="transforma.html#cb75-1" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;dep_delay&quot;</span>, <span class="st">&quot;arr_delay&quot;</span>)</span></code></pre></div>
 <ol start="14" style="list-style-type: decimal">
 <li>¿QUé pasa con el siguiente código? ¿Debería seleccionar todas esas variables? Hint: mirar el argumento <code>ignore.case</code>.</li>
 </ol>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="transforma.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">contains</span>(<span class="st">&quot;TiMe&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="transforma.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">contains</span>(<span class="st">&quot;TiMe&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 6
 ##    dep_time sched_dep_time arr_time sched_arr_time air_time time_hour          
 ##       &lt;int&gt;          &lt;int&gt;    &lt;int&gt;          &lt;int&gt;    &lt;dbl&gt; &lt;dttm&gt;             
@@ -476,13 +476,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="crear-nuevas-variables" class="section level3" number="3.2.4">
 <h3><span class="header-section-number">3.2.4</span> Crear nuevas variables</h3>
 <p>Con <code>mutate()</code> podemos añadir nuevas columnas a nuestro data frame. Estas columnas se crean al aplicar las funciones que conocemos (operaciones aritméticas, <em>lags</em>, acumulados, etc.) a las columnas ya existentes.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="transforma.html#cb79-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
-<span id="cb79-2"><a href="transforma.html#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
-<span id="cb79-3"><a href="transforma.html#cb79-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span>,</span>
-<span id="cb79-4"><a href="transforma.html#cb79-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">hours =</span> air_time <span class="sc">/</span> <span class="dv">60</span>,</span>
-<span id="cb79-5"><a href="transforma.html#cb79-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">gain_per_hour =</span> gain <span class="sc">/</span> hours) <span class="sc">%&gt;%</span>  <span class="co"># ¡usamos las columnas nuevas!</span></span>
-<span id="cb79-6"><a href="transforma.html#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gain, speed, hours, gain_per_hour, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb79-7"><a href="transforma.html#cb79-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="transforma.html#cb78-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="transforma.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
+<span id="cb78-3"><a href="transforma.html#cb78-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span>,</span>
+<span id="cb78-4"><a href="transforma.html#cb78-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">hours =</span> air_time <span class="sc">/</span> <span class="dv">60</span>,</span>
+<span id="cb78-5"><a href="transforma.html#cb78-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">gain_per_hour =</span> gain <span class="sc">/</span> hours) <span class="sc">%&gt;%</span>  <span class="co"># ¡usamos las columnas nuevas!</span></span>
+<span id="cb78-6"><a href="transforma.html#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(gain, speed, hours, gain_per_hour, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-7"><a href="transforma.html#cb78-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 23
 ##    gain speed hours gain_per_hour  year month   day dep_time sched_dep_time
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;
@@ -496,12 +496,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
 ## #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <p>Si solamente nos interesan las nuevas columnas que hemos creado, usamos <code>transmute()</code>:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="transforma.html#cb81-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
-<span id="cb81-2"><a href="transforma.html#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
-<span id="cb81-3"><a href="transforma.html#cb81-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span>,</span>
-<span id="cb81-4"><a href="transforma.html#cb81-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">hours =</span> air_time <span class="sc">/</span> <span class="dv">60</span>,</span>
-<span id="cb81-5"><a href="transforma.html#cb81-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">gain_per_hour =</span> gain <span class="sc">/</span> hours) <span class="sc">%&gt;%</span>  <span class="co"># ¡usamos las columnas nuevas!</span></span>
-<span id="cb81-6"><a href="transforma.html#cb81-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="transforma.html#cb80-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">%&gt;%</span> </span>
+<span id="cb80-2"><a href="transforma.html#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">gain =</span> dep_delay <span class="sc">-</span> arr_delay,</span>
+<span id="cb80-3"><a href="transforma.html#cb80-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span>,</span>
+<span id="cb80-4"><a href="transforma.html#cb80-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">hours =</span> air_time <span class="sc">/</span> <span class="dv">60</span>,</span>
+<span id="cb80-5"><a href="transforma.html#cb80-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">gain_per_hour =</span> gain <span class="sc">/</span> hours) <span class="sc">%&gt;%</span>  <span class="co"># ¡usamos las columnas nuevas!</span></span>
+<span id="cb80-6"><a href="transforma.html#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 4
 ##    gain speed hours gain_per_hour
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
@@ -527,22 +527,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="resumir-variables" class="section level3" number="3.2.5">
 <h3><span class="header-section-number">3.2.5</span> Resumir variables</h3>
 <p>Con <code>summarise()</code> logramos “resumir” la información de determinadas variables, de acuerdo a cierta función que fijemos (media, mediana, IQR, etc.). Debes tener en cuenta que esto “colapsa” el data frame incial.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="transforma.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(flights, <span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="transforma.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(flights, <span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   delay
 ##   &lt;dbl&gt;
 ## 1  12.6</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="transforma.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(flights, <span class="at">delay =</span> <span class="fu">mean</span>(dep_delay))</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="transforma.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(flights, <span class="at">delay =</span> <span class="fu">mean</span>(dep_delay))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   delay
 ##   &lt;dbl&gt;
 ## 1    NA</code></pre>
 <p>Ahora, lo verdaderamente interesante de esta función es usarla para “observaciones agrupadas” con <code>group_by()</code>. Por ejemplo, queremos saber la media de los retrasos por mes y año:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="transforma.html#cb87-1" aria-hidden="true" tabindex="-1"></a>mean_m_y <span class="ot">&lt;-</span>  flights <span class="sc">%&gt;%</span> </span>
-<span id="cb87-2"><a href="transforma.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month) <span class="sc">%&gt;%</span> </span>
-<span id="cb87-3"><a href="transforma.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="transforma.html#cb86-1" aria-hidden="true" tabindex="-1"></a>mean_m_y <span class="ot">&lt;-</span>  flights <span class="sc">%&gt;%</span> </span>
+<span id="cb86-2"><a href="transforma.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, month) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-3"><a href="transforma.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups` argument.</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="transforma.html#cb89-1" aria-hidden="true" tabindex="-1"></a>mean_m_y</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="transforma.html#cb88-1" aria-hidden="true" tabindex="-1"></a>mean_m_y</span></code></pre></div>
 <pre><code>## # A tibble: 12 x 3
 ## # Groups:   year [1]
 ##     year month delay
@@ -560,24 +560,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 11  2013    11  5.44
 ## 12  2013    12 16.6</code></pre>
 <p>Cambiando la variable de agrupamiento (debe ser categórica) podemos obtener la media (o cualqiuer otro estadístico que deseemos) para cada categoría. Veamos un ejemplo en combinación con <code>ggplot</code>:</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="transforma.html#cb91-1" aria-hidden="true" tabindex="-1"></a>delays <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
-<span id="cb91-2"><a href="transforma.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span> </span>
-<span id="cb91-3"><a href="transforma.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb91-4"><a href="transforma.html#cb91-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
-<span id="cb91-5"><a href="transforma.html#cb91-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb91-6"><a href="transforma.html#cb91-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb91-7"><a href="transforma.html#cb91-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
-<span id="cb91-8"><a href="transforma.html#cb91-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">20</span>, dest <span class="sc">!=</span> <span class="st">&quot;HNL&quot;</span>)</span>
-<span id="cb91-9"><a href="transforma.html#cb91-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-10"><a href="transforma.html#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> delays, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dist, <span class="at">y =</span> delay)) <span class="sc">+</span></span>
-<span id="cb91-11"><a href="transforma.html#cb91-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> count), <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb91-12"><a href="transforma.html#cb91-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="transforma.html#cb90-1" aria-hidden="true" tabindex="-1"></a>delays <span class="ot">&lt;-</span> flights <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="transforma.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-3"><a href="transforma.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb90-4"><a href="transforma.html#cb90-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb90-5"><a href="transforma.html#cb90-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">dist =</span> <span class="fu">mean</span>(distance, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-6"><a href="transforma.html#cb90-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb90-7"><a href="transforma.html#cb90-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-8"><a href="transforma.html#cb90-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(count <span class="sc">&gt;</span> <span class="dv">20</span>, dest <span class="sc">!=</span> <span class="st">&quot;HNL&quot;</span>)</span>
+<span id="cb90-9"><a href="transforma.html#cb90-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-10"><a href="transforma.html#cb90-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> delays, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> dist, <span class="at">y =</span> delay)) <span class="sc">+</span></span>
+<span id="cb90-11"><a href="transforma.html#cb90-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> count), <span class="at">alpha =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb90-12"><a href="transforma.html#cb90-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>Estamos agrupando por destino (<code>dest</code>) y luego contamos la cantidad de vuelos que van a cada destino (<code>count</code>), la distancia media (<code>dist</code>) entre los aeropuertos de origen y el destino, y el retraso medio en minutos de la llegada (<code>delay</code>). Habrás notado que filtramos los destinos con pocas visitas (pueden ser outliers) y Honolulu (está muy lejos de casi cualquier aeropuerto), para eliminar un poco de “ruido” en nuestro plot (intenta omitir el filtrado y notarás que es más difícil la interpretación). De este gráfico entendemos que mientras más cercano el destino, mayor probabilidad de retraso. Sin embargo, los vuelos a destinos lejanos parecen presentar menos retrasos (tal vez en el aire puedan compensar el retraso).</p>
 <p>Otros ejemplos usando varias variables de agrupamiento:</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="transforma.html#cb93-1" aria-hidden="true" tabindex="-1"></a>daily <span class="ot">&lt;-</span> <span class="fu">group_by</span>(flights, year, month, day)</span>
-<span id="cb93-2"><a href="transforma.html#cb93-2" aria-hidden="true" tabindex="-1"></a>(per_day   <span class="ot">&lt;-</span> <span class="fu">summarise</span>(daily, <span class="at">flights =</span> <span class="fu">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="transforma.html#cb92-1" aria-hidden="true" tabindex="-1"></a>daily <span class="ot">&lt;-</span> <span class="fu">group_by</span>(flights, year, month, day)</span>
+<span id="cb92-2"><a href="transforma.html#cb92-2" aria-hidden="true" tabindex="-1"></a>(per_day   <span class="ot">&lt;-</span> <span class="fu">summarise</span>(daily, <span class="at">flights =</span> <span class="fu">n</span>()))</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;month&#39;. You can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 365 x 4
 ## # Groups:   year, month [12]
@@ -594,7 +594,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9  2013     1     9     902
 ## 10  2013     1    10     932
 ## # ... with 355 more rows</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="transforma.html#cb96-1" aria-hidden="true" tabindex="-1"></a>(per_month <span class="ot">&lt;-</span> <span class="fu">summarise</span>(per_day, <span class="at">flights =</span> <span class="fu">sum</span>(flights)))</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="transforma.html#cb95-1" aria-hidden="true" tabindex="-1"></a>(per_month <span class="ot">&lt;-</span> <span class="fu">summarise</span>(per_day, <span class="at">flights =</span> <span class="fu">sum</span>(flights)))</span></code></pre></div>
 <pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 12 x 3
 ## # Groups:   year [1]
@@ -612,15 +612,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10  2013    10   28889
 ## 11  2013    11   27268
 ## 12  2013    12   28135</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="transforma.html#cb99-1" aria-hidden="true" tabindex="-1"></a>(per_year  <span class="ot">&lt;-</span> <span class="fu">summarise</span>(per_month, <span class="at">flights =</span> <span class="fu">sum</span>(flights)))</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="transforma.html#cb98-1" aria-hidden="true" tabindex="-1"></a>(per_year  <span class="ot">&lt;-</span> <span class="fu">summarise</span>(per_month, <span class="at">flights =</span> <span class="fu">sum</span>(flights)))</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##    year flights
 ##   &lt;int&gt;   &lt;int&gt;
 ## 1  2013  336776</code></pre>
 <p>También, si deseas deshacer la agrupación, por ejemplo, si quieres contar el total de vuelos sin agrupar:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="transforma.html#cb101-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">%&gt;%</span> </span>
-<span id="cb101-2"><a href="transforma.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>             <span class="co"># deshacemoos la agrupación por fecha</span></span>
-<span id="cb101-3"><a href="transforma.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">flights =</span> <span class="fu">n</span>())  <span class="co"># tooooooodos los vuelos :)</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="transforma.html#cb100-1" aria-hidden="true" tabindex="-1"></a>daily <span class="sc">%&gt;%</span> </span>
+<span id="cb100-2"><a href="transforma.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span>             <span class="co"># deshacemoos la agrupación por fecha</span></span>
+<span id="cb100-3"><a href="transforma.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">flights =</span> <span class="fu">n</span>())  <span class="co"># tooooooodos los vuelos :)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 x 1
 ##   flights
 ##     &lt;int&gt;

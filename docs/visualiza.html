@@ -521,20 +521,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ejercicios-5" class="section level4" number="2.4.6.1">
 <h4><span class="header-section-number">2.4.6.1</span> Ejercicios</h4>
 <ol start="17" style="list-style-type: decimal">
-<li>Un tercer parámetro de posición para los diagramas de barras es <code>position = "identity"</code>. Modifica el ajuste de posición del siguiente código y compara la idoneidad del mismo con el obtenido para <code>position = "dodge"</code>. Hint: considera añadir algo de transparencia (e.g. <code>alpha = 0.5</code>) o quitar el relleno por completo (i.e. <code>fill = NA</code>).</li>
-</ol>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="visualiza.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds) <span class="sc">+</span> </span>
-<span id="cb44-2"><a href="visualiza.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> cut, <span class="at">fill =</span> clarity))</span></code></pre></div>
-<ol start="18" style="list-style-type: decimal">
 <li>Los diagramas de cajas se logran con <code>geom_boxplot</code>. Este tipo de gráficos permiten comparar las distribuciones de una variable continua para diferentes grupos o clases. Por ejemplo, para los datos <code>mpg</code> podemos comparar la distribución del consumo de acuerdo al tipo de tracción:</li>
 </ol>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="visualiza.html#cb45-1" aria-hidden="true" tabindex="-1"></a>p_box <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb45-2"><a href="visualiza.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
-<span id="cb45-3"><a href="visualiza.html#cb45-3" aria-hidden="true" tabindex="-1"></a>p_box</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="visualiza.html#cb44-1" aria-hidden="true" tabindex="-1"></a>p_box <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="fu">aes</span>(<span class="at">x =</span> drv, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="visualiza.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb44-3"><a href="visualiza.html#cb44-3" aria-hidden="true" tabindex="-1"></a>p_box</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>Consulta la ayuda de <code>geom_jitter</code> e incluye las observaciones como puntos superpuestos al diagrama de cajas. Deberías obtener algo como esto:</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
-<ol start="19" style="list-style-type: decimal">
+<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<ol start="18" style="list-style-type: decimal">
 <li><p>Modifica <code>p_box</code> para que represente también la información relativa al tipo de vehículo (variable <code>class</code>). ¿Puedes identificar el <em>ajuste de posición</em> por defecto de <code>geom_boxplot</code>?</p></li>
 <li><p>Cambia la orientación de los diagramas de cajas de verticales a horizontales. Hint: consulta la documentación de <code>coord_flip</code>.</p></li>
 <li><p>Consulta la documentación de <code>coord_polar</code> y construye un diagrama circular (“de pastel”) de la variable tipo de tracción (<code>drv</code>).</p></li>
@@ -545,6 +540,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="resumen" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> Resumen</h2>
 <p>En las secciones anteriores has asimilado la “gramática estratificada de los gráficos” (<em>The layered grammar of graphics</em>) de <code>ggplot</code>. Aunque no lo parezca ahora, ya eres capaz de construir cualquier tipo de gráfico en 2D. Resumiendo, dispones de un modelo con 7 parámetros a definir (no necesitas definirlos todos) y tantas capas de <strong>geoms</strong> como necesites:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="visualiza.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
+<span id="cb45-2"><a href="visualiza.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>(</span>
+<span id="cb45-3"><a href="visualiza.html#cb45-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>),</span>
+<span id="cb45-4"><a href="visualiza.html#cb45-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">stat =</span> <span class="sc">&lt;</span>STAT<span class="sc">&gt;</span>, </span>
+<span id="cb45-5"><a href="visualiza.html#cb45-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
+<span id="cb45-6"><a href="visualiza.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb45-7"><a href="visualiza.html#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>COORDINATE_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<span id="cb45-8"><a href="visualiza.html#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span></span></code></pre></div>
+<p>Finalmente, podemos añadir otros 2 parámetros a este modelo que te permitirán modificar otros elementos necesarios a la hora de “comunicar” con tus gráficos (título, leyenda, etiquetado de los ejes, escala de los ejes, etc.):</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="visualiza.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
 <span id="cb46-2"><a href="visualiza.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>(</span>
 <span id="cb46-3"><a href="visualiza.html#cb46-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>),</span>
@@ -552,21 +556,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb46-5"><a href="visualiza.html#cb46-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
 <span id="cb46-6"><a href="visualiza.html#cb46-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb46-7"><a href="visualiza.html#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>COORDINATE_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
-<span id="cb46-8"><a href="visualiza.html#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span></span></code></pre></div>
-<p>Finalmente, podemos añadir otros 2 parámetros a este modelo que te permitirán modificar otros elementos necesarios a la hora de “comunicar” con tus gráficos (título, leyenda, etiquetado de los ejes, escala de los ejes, etc.):</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="visualiza.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>) <span class="sc">+</span> </span>
-<span id="cb47-2"><a href="visualiza.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>(</span>
-<span id="cb47-3"><a href="visualiza.html#cb47-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>),</span>
-<span id="cb47-4"><a href="visualiza.html#cb47-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">stat =</span> <span class="sc">&lt;</span>STAT<span class="sc">&gt;</span>, </span>
-<span id="cb47-5"><a href="visualiza.html#cb47-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">position =</span> <span class="sc">&lt;</span>POSITION<span class="sc">&gt;</span></span>
-<span id="cb47-6"><a href="visualiza.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb47-7"><a href="visualiza.html#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>COORDINATE_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
-<span id="cb47-8"><a href="visualiza.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
-<span id="cb47-9"><a href="visualiza.html#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>SCALE_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
-<span id="cb47-10"><a href="visualiza.html#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>THEME_FUNCTION<span class="sc">&gt;</span></span></code></pre></div>
+<span id="cb46-8"><a href="visualiza.html#cb46-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<span id="cb46-9"><a href="visualiza.html#cb46-9" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>SCALE_FUNCTION<span class="sc">&gt;</span> <span class="sc">+</span></span>
+<span id="cb46-10"><a href="visualiza.html#cb46-10" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>THEME_FUNCTION<span class="sc">&gt;</span></span></code></pre></div>
 <div id="ejercicios-6" class="section level4" number="2.5.0.1">
 <h4><span class="header-section-number">2.5.0.1</span> Ejercicios</h4>
-<ol start="22" style="list-style-type: decimal">
+<ol start="21" style="list-style-type: decimal">
 <li>Cambia la escala y tema de algunos de los gráficos que has desarrollado. Hint: en el <em>Cheatsheet: Data Visualization with ggplot2</em> tienes un resumen muy completo de las herramientas que necesitas.</li>
 </ol>
 
